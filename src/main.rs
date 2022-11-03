@@ -1,3 +1,5 @@
+mod x;
+
 fn main() {
-    println!("Hello, world!");
+    x::say_hello("Shoshanna");
 }

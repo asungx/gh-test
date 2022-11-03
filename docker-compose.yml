@@ -1,4 +1,13 @@
 services:
+  build:
+    image: rust:latest
+    volumes:
+      - type: bind
+        source: .
+        target: /mnt/gh_test
+    working_dir: /mnt/gh_test
+    command: cargo build --release
+
   test:
     image: rust:latest
     volumes:

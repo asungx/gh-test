@@ -1,4 +1,16 @@
 services:
+  dev:
+    build:
+      context: ./docker/cicd
+    volumes:
+      - type: bind
+        source: .
+        target: /mnt/gh_test
+    working_dir: /mnt/gh_test
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+
   build:
     image: rust:latest
     volumes:
@@ -16,3 +28,13 @@ services:
         target: /mnt/gh_test
     working_dir: /mnt/gh_test
     command: cargo test
+
+  release:
+    build:
+      context: ./docker/cicd
+    volumes:
+      - type: bind
+        source: .
+        target: /mnt/gh_test
+    working_dir: /mnt/gh_test
+    entrypoint: bash /mnt/gh_test/docker/cicd/release.sh
